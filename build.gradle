@@ -13,6 +13,12 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // 1. 이미지 스캔(OCR)을 위한 핵심 라이브러리
+    implementation 'net.sourceforge.tess4j:tess4j:5.8.0'
+
+    // 2. 롬복 (projectlombok 입니다! m 확인! ㅋ)
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
 }
 
 test {
