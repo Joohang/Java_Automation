@@ -15,10 +15,23 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // 1. 이미지 스캔(OCR)을 위한 핵심 라이브러리
     implementation 'net.sourceforge.tess4j:tess4j:5.8.0'
+    // 2. PDF 스캔 라이브러리
+    implementation 'org.apache.pdfbox:pdfbox:2.0.30'
 
-    // 2. 롬복 (projectlombok 입니다! m 확인! ㅋ)
+    // 3. 롬복 (projectlombok 입니다! m 확인! ㅋ)
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
+}
+jar {
+    manifest {
+        // 🚨 본인의 Main 클래스 경로를 정확히 적어줘야 합니다!
+        attributes 'Main-Class': 'com.master.auto.Main'
+    }
+    // 의존성 라이브러리들을 JAR 안에 포함시키는 설정
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 test {
